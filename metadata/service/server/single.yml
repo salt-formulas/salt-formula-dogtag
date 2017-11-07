@@ -1,0 +1,17 @@
+applications:
+- dogtag
+parameters:
+  dogtag:
+    server:
+      enabled: True
+      subsystems:
+        CA:
+          enabled: True
+        KRA:
+          enabled: True
+        OCSP:
+          enabled: True
+        TKS:
+          enabled: True
+        TPS:
+          enabled: True
