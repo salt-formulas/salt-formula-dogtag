@@ -1,0 +1,30 @@
+{%- load_yaml as server_defaults %}
+default:
+  default_config_options:
+    pki_admin_password: PASSWORD
+    pki_backup_password: PASSWORD
+    pki_client_database_password: PASSWORD
+    pki_client_pkcs12_password: PASSWORD
+    pki_clone_pkcs12_password: PASSWORD
+    pki_ds_password: PASSWORD
+    pki_token_password: PASSWORD
+    pki_security_domain_name: EXAMPLE
+    pki_security_domain_password: PASSWORD
+  subsystems:
+    KRA:
+      pkgs: [pki-ca, pki-kra]
+    OCSP:
+      pkgs: [pki-ca, pki-ocsp]
+    TKS:
+      pkgs: [pki-tks]
+    TPS:
+      pkgs: [pki-tps, pki-tps-client]
+      pki_authdb_basedn: 'o=pki-tomcat-TPS'
+Debian:
+  pkgs:
+  - python-nss
+  - 389-ds-base
+  - pki-ca
+{%- endload %}
+
+{%- set server = salt['grains.filter_by'](server_defaults, merge=salt['pillar.get']('dogtag:server'), base='default') %}

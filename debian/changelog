@@ -1,0 +1,5 @@
+salt-formula-dogtag (0.1) trusty; urgency=medium
+
+  * Initial release
+
+ -- Oleg Iurchenko <oiurchenko@mirantis.com>  Tue, 11 Nov 2017 17:35:41 +0200

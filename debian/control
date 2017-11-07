@@ -1,0 +1,15 @@
+Source: salt-formula-dogtag
+Maintainer: Oleg Iurchenko <oiurchenko@mirantis.com>
+Section: admin
+Priority: optional
+Build-Depends: debhelper (>= 9), salt-master, python, python-yaml
+Standards-Version: 3.9.6
+Homepage: https://www.mirantis.com/
+Vcs-Browser: https://github.com/salt-formulas/salt-formula-dogtag
+Vcs-Git: https://github.com/salt-formulas/salt-formula-dogtag.git
+
+Package: salt-formula-dogtag
+Architecture: all
+Depends: ${misc:Depends}, salt-master, reclass
+Description: dogtag salt formula
+ Install and configure DogTag system.
