@@ -61,13 +61,25 @@ pkispawn -f /etc/dogtag/dogtag.cfg -s {{ key_name }}:
 
 
 {%- if server.get('export_pem_file_path', False) %}
-openssl pkcs12 -in /root/.dogtag/pki-tomcat/ca_admin_cert.p12 -passin pass:{{ server.default_config_options.pki_client_pkcs12_password|default('PASSWORD') }} -out {{ server.export_pem_file_path }} -nodes:
+export_dogtag_root_cert_to_pem_file:
   cmd.run:
-  {%- if grains.get('noservices') %}
-  - onlyif: /bin/false
-  {%- endif %}
-  - require:
-    - file: /etc/dogtag/dogtag.cfg
+    - name: openssl pkcs12 -in /root/.dogtag/pki-tomcat/ca_admin_cert.p12 -passin pass:{{ server.default_config_options.get('pki_client_pkcs12_password', 'PASSWORD') }} -out {{ server.export_pem_file_path }} -nodes
+    - umask: 077
+    {%- if grains.get('noservices') %}
+    - onlyif: /bin/false
+    {%- endif %}
+    - unless: 'test -f {{ server.export_pem_file_path }}'
+
+mine_send_{{ server.export_pem_file_path }}:
+  module.run:
+    - name: mine.send
+    - func: dogtag_admin_cert
+    - kwargs:
+        mine_function: cmd.run
+    - args:
+      - 'cat {{ server.export_pem_file_path }}'
+    - onchanges:
+      - cmd: export_dogtag_root_cert_to_pem_file
 {%- endif %}
 
 {%- endif %}
