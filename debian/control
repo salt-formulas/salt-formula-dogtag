@@ -10,6 +10,6 @@ Vcs-Git: https://github.com/salt-formulas/salt-formula-dogtag.git
 
 Package: salt-formula-dogtag
 Architecture: all
-Depends: ${misc:Depends}, salt-master, reclass
+Depends: ${misc:Depends}
 Description: dogtag salt formula
  Install and configure DogTag system.
