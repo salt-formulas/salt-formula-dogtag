@@ -10,6 +10,7 @@ default:
     pki_token_password: PASSWORD
     pki_security_domain_name: EXAMPLE
     pki_security_domain_password: PASSWORD
+    pki_clone_pkcs12_path: /etc/dogtag/ca-certs.p12
   subsystems:
     KRA:
       pkgs: [pki-ca, pki-kra]
@@ -28,3 +29,6 @@ Debian:
 {%- endload %}
 
 {%- set server = salt['grains.filter_by'](server_defaults, merge=salt['pillar.get']('dogtag:server'), base='default') %}
+
+{%- set dogtag_mine_certs = salt['mine.get']('I@dogtag:server:role:master', 'dogtag_certs', 'compound') %}
+{%- do server.update({'dogtag_certs': dogtag_mine_certs.values()[0] }) %}
