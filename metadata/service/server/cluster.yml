@@ -1,0 +1,18 @@
+applications:
+- dogtag
+parameters:
+  dogtag:
+    server:
+      enabled: True
+      role: ${_param:dogtag_cluster_role}
+      subsystems:
+        CA:
+          enabled: True
+        KRA:
+          enabled: True
+        OCSP:
+          enabled: True
+        TKS:
+          enabled: True
+        TPS:
+          enabled: True
