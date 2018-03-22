@@ -10,8 +10,8 @@ parameters:
         KRA:
           enabled: True
         OCSP:
-          enabled: True
+          enabled: False
         TKS:
-          enabled: True
+          enabled: False
         TPS:
-          enabled: True
+          enabled: False
