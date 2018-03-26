@@ -3,9 +3,11 @@
 FullMachineName = {{ server.ldap_hostname|default('localhost') }}
 SuiteSpotUserID = dirsrv
 SuiteSpotGroup = dirsrv
+ConfigDirectoryAdminID = {{ server.ldap_admin_id|default('admin') }}
+ConfigDirectoryAdminPwd = {{ server.ldap_admin_password }}
 [slapd]
 ServerPort = {{ server.ldap_server_port|default(389) }}
 ServerIdentifier = pki-tomcat
 Suffix = {{ server.ldap_dc|default('dc=example,dc=com') }}
 RootDN = {{ server.ldap_dn|default('cn=Directory Manager') }}
-RootDNPwd = {{ server.ldap_dn_password|default('PASSWORD') }}
+RootDNPwd = {{ server.ldap_dn_password }}

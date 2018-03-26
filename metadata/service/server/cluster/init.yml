@@ -1,0 +1,50 @@
+applications:
+- dogtag
+parameters:
+  _param:
+    dogtag_pki_security_domain_name: 'EXAMPLE'
+    dogtag_pki_security_domain: 'example.com'
+    dogtag_pki_ds_base_dn: 'dc=example,dc=com'
+  dogtag:
+    server:
+      enabled: True
+      default_config_options:
+        pki_client_pkcs12_password: ${_param:dogtag_pki_client_pkcs12_password}
+      subsystems:
+        CA:
+          enabled: True
+          pki_admin_email: caadmin@${_param:dogtag_pki_security_domain}
+          pki_admin_name: caadmin
+          pki_admin_nickname: caadmin
+          pki_admin_password: ${_param:dogtag_pki_admin_password}
+          pki_admin_uid: caadmin
+          pki_client_database_password: ${_param:dogtag_pki_client_database_password}
+          pki_client_database_purge: False
+          pki_client_pkcs12_password: ${_param:dogtag_pki_client_pkcs12_password}
+          pki_ds_base_dn: ${_param:dogtag_pki_ds_base_dn}
+          pki_ds_database: ca
+          pki_ds_password: ${_param:dogtag_pki_ds_password}
+          pki_security_domain_name: ${_param:dogtag_pki_security_domain_name}
+          pki_security_domain_password: ${_param:dogtag_pki_security_domain_password}
+        KRA:
+          enabled: True
+          pki_admin_cert_file: /root/.dogtag/pki-tomcat/ca_admin.cert
+          pki_admin_email: kraadmin@${_param:dogtag_pki_security_domain}
+          pki_admin_name: kraadmin
+          pki_admin_nickname: kraadmin
+          pki_admin_password: ${_param:dogtag_pki_admin_password}
+          pki_admin_uid: kraadmin
+          pki_client_database_password: ${_param:dogtag_pki_client_database_password}
+          pki_client_pkcs12_password: ${_param:dogtag_pki_client_pkcs12_password}
+          pki_ds_database: kra
+          pki_ds_password: ${_param:dogtag_pki_ds_password}
+          pki_security_domain_name: ${_param:dogtag_pki_security_domain_name}
+          pki_security_domain_user: caadmin
+          pki_security_domain_password: ${_param:dogtag_pki_security_domain_password}
+          pki_token_password: ${_param:dogtag_pki_token_password}
+        OCSP:
+          enabled: False
+        TKS:
+          enabled: False
+        TPS:
+          enabled: False

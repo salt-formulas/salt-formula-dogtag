@@ -1,0 +1,8 @@
+classes:
+- service.dogtag.server.cluster
+parameters:
+  _param:
+    dogtag_pki_security_domain_https_port: 8443
+  dogtag:
+    server:
+      role: master

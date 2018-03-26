@@ -1,0 +1,26 @@
+classes:
+- service.dogtag.server.cluster
+parameters:
+  _param:
+    dogtag_pki_security_domain_https_port: 8443
+    dogtag_pki_security_domain_name: 'EXAMPLE'
+  dogtag:
+    server:
+      role: slave
+      subsystems:
+        CA:
+          pki_security_domain_hostname: ${_param:dogtag_master_host}
+          pki_security_domain_user: caadmin
+          pki_security_domain_https_port: ${_param:dogtag_pki_security_domain_https_port}
+          pki_clone_uri: https://${_param:dogtag_master_host}:${_param:dogtag_pki_security_domain_https_port}
+          pki_clone_pkcs12_path: /etc/dogtag/ca-certs.p12
+          pki_ssl_server_subject_dn: cn=CA Signing Certificate,OU=pki-tomcat,o=${_param:dogtag_pki_security_domain_name}
+          pki_clone_pkcs12_password: ${_param:dogtag_pki_clone_pkcs12_password}
+        KRA:
+          pki_security_domain_hostname: ${_param:dogtag_master_host}
+          pki_security_domain_user: caadmin
+          pki_security_domain_https_port: ${_param:dogtag_pki_security_domain_https_port}
+          pki_clone_uri: https://${_param:dogtag_master_host}:${_param:dogtag_pki_security_domain_https_port}
+          pki_clone_pkcs12_path: /etc/dogtag/ca-certs.p12
+          pki_ssl_server_subject_dn: cn=CA Signing Certificate,OU=pki-tomcat,o=${_param:dogtag_pki_security_domain_name}
+          pki_clone_pkcs12_password: ${_param:dogtag_pki_clone_pkcs12_password}
