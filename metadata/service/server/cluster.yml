@@ -3,6 +3,7 @@ applications:
 parameters:
   _param:
     dogtag_pki_security_domain_https_port: 8443
+    dogtag_cluster_role: master
   dogtag:
     server:
       enabled: True
